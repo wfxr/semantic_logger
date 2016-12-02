@@ -102,7 +102,7 @@ logger.info('Queried table',
 
 * Add custom tags to every log entry within a block of code,
   including third party libraries and gems.
-* Associate all log entries with a user, session, or call across all applicable threqds.
+* Associate all log entries with a user, session, or call across all applicable threads.
 
 ### Payload support
 
