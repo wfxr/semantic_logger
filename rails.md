@@ -53,7 +53,7 @@ When running in an environment where local file logging is not available, or to 
 disable the default rails file logging by setting:
 
 ~~~ruby
-config.rails_semantic_logger.add_file_appender = true
+config.rails_semantic_logger.add_file_appender = false
 ~~~
 
 After disabling the default file logging another appender needs to be added before any logging will be sent anywhere.
@@ -102,6 +102,20 @@ To change the log level:
 config.log_level = :debug
 ~~~
 
+#### Quiet asset logging
+
+Rails logs asset retrievals at the debug level. These log entries can quickly clutter the log output:
+
+~~~
+Rack -- Started -- {:ip => "127.0.0.1", :method => "GET", :path => "/assets/rocket_job_mission_control/rocket-icon-64x64.png"}
+~~~
+
+To turn off the asset logging:
+
+~~~ruby
+config.rails_semantic_logger.quiet_assets = true
+~~~
+
 #### Colorize Logging
 
 If the Rails colorized logging is enabled, then the colorized formatter will be used
@@ -116,14 +130,14 @@ config.colorize_logging = false
 By default Action Controller and Active Record text messages are converted to semantic data (Hash):
 
 ~~~
-Rails -- Started -- { :ip => "127.0.0.1", :method => "GET", :path => "/users" }
+Rack -- Started -- { :ip => "127.0.0.1", :method => "GET", :path => "/users" }
 UserController -- Completed #index -- { :action => "index", :db_runtime => 54.64, :format => "HTML", :method => "GET", :mongo_runtime => 0.0, :path => "/users", :status => 200, :status_message => "OK", :view_runtime => 709.88 }
 ~~~
 
 To disable semantic message conversion:
 
 ~~~ruby
-config.rails_semantic_logger.semantic   = false
+config.rails_semantic_logger.semantic = false
 ~~~
 
 #### Started message
@@ -131,13 +145,13 @@ config.rails_semantic_logger.semantic   = false
 By default the Started message is logged at the debug level so that it does not appear in production.
 
 ~~~
-Rails -- Started -- { :ip => "127.0.0.1", :method => "GET", :path => "/users" }
+Rack -- Started -- { :ip => "127.0.0.1", :method => "GET", :path => "/users" }
 ~~~
 
 To show Rack started messages in production:
 
 ~~~ruby
-config.rails_semantic_logger.started    = true
+config.rails_semantic_logger.started = true
 ~~~
 
 #### Processing message
@@ -165,7 +179,7 @@ ActionView::Base --   Rendered data/search/_user.html.haml (46.7ms)
 To show the Action View rendering messages in production:
 
 ~~~ruby
-config.rails_semantic_logger.rendered   = true
+config.rails_semantic_logger.rendered = true
 ~~~
 
 #### Awesome Print Options

@@ -325,8 +325,8 @@ entire hashes of data. The additional hash of data will be merged into
 the payload of every log entry
 
 ~~~ruby
-logger.with_payload(:user => 'Jack', :zip_code => 12345) do
-  # All log entries in this block will include the above payload hash
+logger.named_tagged(user: 'Jack', zip_code: 12345) do
+  # All log entries in this block will include the above named tags
   logger.debug("Hello World")
 end
 ~~~
